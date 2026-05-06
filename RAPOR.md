@@ -5,7 +5,7 @@
 - Öğrenci: Engin Elibol
 - Numara: 2310238554
 - Ders: Yazılım Kalitesi ve Güvenliği
-- Repo Linki: [yazilim-kalitesi-ve-guvenligi-projesi](https://github.com/Sqap85/yazilim-kalitesi-ve-guvenligi-projesi)
+- Repo Linki: `https://github.com/Sqap85/yazilim-kalitesi-ve-guvenligi-projesi`
 
 ## 2. Proje Özeti
 
@@ -67,7 +67,34 @@ Pipeline aşağıdaki hataları erken aşamada yakalayacak şekilde tasarlandı:
 
 Bu sayede sorunların üretim öncesi görünür olması sağlanır ve manuel kontrol yükü azalır.
 
-## 5. SonarQube Bulguları ve İyileştirmeler
+## 5. Docker ile Containerization
+
+Uygulama Dockerfile kullanılarak container image haline getirildi ve servisler `docker compose` ile ayağa kaldırıldı.
+
+Yerel doğrulama:
+
+- Uygulama image adı: `techstore-devops-app:latest`
+- Jenkins image adı: `techstore-jenkins-local:latest`
+- Compose servisleri: `prometheus`, `grafana`, `sonarqube`
+- Uygulama sağlık kontrolü: `{"service":"techstore","status":"healthy","version":"1.0.0"}`
+
+Kullanılan temel komutlar:
+
+```bash
+docker build -t techstore-devops-app:latest .
+docker compose up -d
+docker compose ps
+docker ps
+```
+
+Not:
+Yerel makinede `5000` portu macOS AirPlay servisiyle çakıştığı için host tarafındaki uygulama kontrolleri `5001` portunda, container ağı içindeki kontroller ise `5000` portunda doğrulandı.
+
+Docker ve Docker Compose doğrulama ekran görüntüsü:
+
+![Docker Durumu](screenshots/docker-status.png)
+
+## 6. SonarQube Bulguları ve İyileştirmeler
 
 Yerel kod incelemesinde aşağıdaki iyileştirmeler yapıldı:
 
@@ -85,7 +112,7 @@ SonarQube ekran görüntüsü:
 
 ![SonarQube Dashboard](screenshots/sonarqube.png)
 
-## 6. Grafana Dashboard
+## 7. Grafana Dashboard
 
 Önerilen paneller:
 
@@ -107,7 +134,7 @@ Grafana ekran görüntüsü:
 
 ![Grafana Dashboard](screenshots/grafana.png)
 
-## 7. Jenkins Build Ekran Görüntüsü
+## 8. Jenkins Build Ekran Görüntüsü
 
 Yerel Jenkins doğrulaması:
 
@@ -117,14 +144,14 @@ Yerel Jenkins doğrulaması:
 
 ![Jenkins Build Success](screenshots/jenkins.png)
 
-## 8. Coverage Raporu
+## 9. Coverage Raporu
 
 - Komut: `pytest tests/test_app.py -v --cov=app --cov-report=term-missing`
 - Sonuç: `34 passed`, `TOTAL %93`
 
 ![Coverage Raporu](screenshots/coverage.png)
 
-## 9. UI Test Sonucu
+## 10. UI Test Sonucu
 
 - Komut: `BASE_URL=http://127.0.0.1:5001 pytest tests/test_ui.py -v`
 - Sonuç: `10/10 test geçti`
@@ -137,6 +164,6 @@ Uygulama ekran görüntüleri:
 ![Checkout](screenshots/checkout.png)
 ![Health Endpoint](screenshots/health.png)
 
-## 10. Sonuç
+## 11. Sonuç
 
 Proje teslim kriterlerine uygun hale getirilmiş, test ve pipeline tarafı güçlendirilmiş, ekran görüntüleriyle desteklenmiş bir rapor hazırlandı. Mevcut haliyle rapor teslim için kullanılabilir.
