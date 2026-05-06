@@ -164,6 +164,3 @@ Uygulama ekran görüntüleri:
 ![Checkout](screenshots/checkout.png)
 ![Health Endpoint](screenshots/health.png)
 
-## 11. Sonuç
-
-Proje teslim kriterlerine uygun hale getirilmiş, test ve pipeline tarafı güçlendirilmiş, ekran görüntüleriyle desteklenmiş bir rapor hazırlandı. Mevcut haliyle rapor teslim için kullanılabilir.
