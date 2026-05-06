@@ -17,6 +17,8 @@ Yerel doğrulama sonucu:
 - Birim test sayısı: `34`
 - UI test sayısı: `10`
 - Hedef coverage: `%80+`
+- Ölçülen coverage: `%93`
+- UI test sonucu: `10/10 geçti`
 - Uygulama servis endpoint'leri: `/`, `/product/<id>`, `/cart`, `/checkout`, `/health`, `/metrics`
 
 ## 3. Adımlarda Karşılaşılan Zorluklar ve Çözümler
@@ -103,6 +105,11 @@ Grafana ekran görüntüleri eklenecek:
 - Komut: `pytest tests/test_app.py -v --cov=app --cov-report=term-missing`
 - Ekran görüntüsü: `[Buraya coverage çıktısını ekleyin]`
 
-## 9. Sonuç
+## 9. UI Test Sonucu
+
+- Komut: `BASE_URL=http://127.0.0.1:5001 pytest tests/test_ui.py -v`
+- Sonuç: `10/10 test geçti`
+
+## 10. Sonuç
 
 Proje teslim kriterlerine yaklaşacak şekilde düzenlenmiş, test ve pipeline tarafı güçlendirilmiş, raporlama için gerekli başlıklar hazırlanmıştır. GitHub bağlantısı ve ekran görüntüleri eklendikten sonra rapor doğrudan teslim dosyası olarak kullanılabilir.

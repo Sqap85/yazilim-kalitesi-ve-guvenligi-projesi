@@ -2,11 +2,13 @@
 TechStore - Selenium UI Test Paketi
 Çalıştırmak için önce uygulamayı başlatın: python app.py
 Sonra: pytest tests/test_ui.py -v
+Alternatif port için: BASE_URL=http://127.0.0.1:5001 pytest tests/test_ui.py -v
 
 Gereksinimler:
 - Google Chrome kurulu olmalı
 - chromedriver: pip install webdriver-manager
 """
+import os
 import pytest
 import time
 from selenium import webdriver
@@ -16,7 +18,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-BASE_URL = 'http://localhost:5000'
+BASE_URL = os.getenv('BASE_URL', 'http://localhost:5000')
 
 
 @pytest.fixture(scope='module')
