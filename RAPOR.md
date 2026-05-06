@@ -2,11 +2,10 @@
 
 ## 1. Proje Bilgileri
 
-- Öğrenci: `[Ad Soyad]`
-- Numara: `[Öğrenci Numaranız]`
+- Öğrenci: Engin Elibol
+- Numara: 2310238554
 - Ders: Yazılım Kalitesi ve Güvenliği
-- Repo Linki: `[GitHub repo linkini ekleyin]`
-- Teslim Tarihi: Final sınavı günü
+- Repo Linki: [yazilim-kalitesi-ve-guvenligi-projesi](https://github.com/Sqap85/yazilim-kalitesi-ve-guvenligi-projesi)
 
 ## 2. Proje Özeti
 
@@ -77,9 +76,14 @@ Yerel kod incelemesinde aşağıdaki iyileştirmeler yapıldı:
 - Hata gizleyen pipeline davranışı kaldırıldı
 - Test sayısı artırılarak kritik akışlar daha iyi kapsandı
 
-SonarQube ekran görüntüsü eklenecek:
+SonarQube doğrulama sonucu:
 
-- `[Buraya SonarQube dashboard ekran görüntüsü ekleyin]`
+- Proje: `techstore`
+- Quality Gate Durumu: `PASSED`
+
+SonarQube ekran görüntüsü:
+
+![SonarQube Dashboard](screenshots/sonarqube.png)
 
 ## 6. Grafana Dashboard
 
@@ -90,26 +94,49 @@ SonarQube ekran görüntüsü eklenecek:
 3. `topk(5, cart_add_total)`
 4. `rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])`
 
-Grafana ekran görüntüleri eklenecek:
+Yerel dashboard doğrulaması:
 
-- `[Buraya dashboard genel görünümünü ekleyin]`
-- `[Buraya istek sayısı grafiğini ekleyin]`
-- `[Buraya hata oranı grafiğini ekleyin]`
+- Dashboard adı: `TechStore Overview`
+- Prometheus target durumu: `techstore = UP`
+
+Prometheus ekran görüntüsü:
+
+![Prometheus Targets](screenshots/prometheus.png)
+
+Grafana ekran görüntüsü:
+
+![Grafana Dashboard](screenshots/grafana.png)
 
 ## 7. Jenkins Build Ekran Görüntüsü
 
-- `[Buraya başarılı Jenkins build ekran görüntüsünü ekleyin]`
+Yerel Jenkins doğrulaması:
+
+- Job adı: `techstore-pipeline`
+- Başarılı build: `#3`
+- Son durum: `SUCCESS`
+
+![Jenkins Build Success](screenshots/jenkins.png)
 
 ## 8. Coverage Raporu
 
 - Komut: `pytest tests/test_app.py -v --cov=app --cov-report=term-missing`
-- Ekran görüntüsü: `[Buraya coverage çıktısını ekleyin]`
+- Sonuç: `34 passed`, `TOTAL %93`
+
+![Coverage Raporu](screenshots/coverage.png)
 
 ## 9. UI Test Sonucu
 
 - Komut: `BASE_URL=http://127.0.0.1:5001 pytest tests/test_ui.py -v`
 - Sonuç: `10/10 test geçti`
 
+Uygulama ekran görüntüleri:
+
+![Ana Sayfa](screenshots/home.png)
+![Urun Detay](screenshots/product.png)
+![Sepet](screenshots/cart.png)
+![Checkout](screenshots/checkout.png)
+![Health Endpoint](screenshots/health.png)
+
 ## 10. Sonuç
 
-Proje teslim kriterlerine yaklaşacak şekilde düzenlenmiş, test ve pipeline tarafı güçlendirilmiş, raporlama için gerekli başlıklar hazırlanmıştır. GitHub bağlantısı ve ekran görüntüleri eklendikten sonra rapor doğrudan teslim dosyası olarak kullanılabilir.
+Proje teslim kriterlerine uygun hale getirilmiş, test ve pipeline tarafı güçlendirilmiş, ekran görüntüleriyle desteklenmiş bir rapor hazırlandı. Mevcut haliyle rapor teslim için kullanılabilir.

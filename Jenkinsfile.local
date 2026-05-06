@@ -1,0 +1,74 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_DIR = '/private/tmp/techstore-jenkins-workspace'
+        SONAR_URL = 'http://techstore-sonarqube:9000'
+        SONAR_TOKEN = "${env.SONAR_TOKEN_LOCAL}"
+    }
+
+    stages {
+        stage('Validate Workspace') {
+            steps {
+                sh '''
+                    test -d "$PROJECT_DIR"
+                    test -f "$PROJECT_DIR/app.py"
+                    test -f "$PROJECT_DIR/requirements.txt"
+                    echo "Workspace hazir: $PROJECT_DIR"
+                '''
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                sh '''
+                    cd "$PROJECT_DIR"
+                    python3 -m venv .jenkins-venv
+                    . .jenkins-venv/bin/activate
+                    pip install --quiet -r requirements.txt pytest-cov
+                    pytest tests/test_app.py -v --cov=app --cov-report=term-missing
+                '''
+            }
+        }
+
+        stage('SonarQube Check') {
+            steps {
+                sh '''
+                    curl -fsS -u "$SONAR_TOKEN:" \
+                      "$SONAR_URL/api/qualitygates/project_status?projectKey=techstore" \
+                      | tee sonar-status.json
+                    grep -q '"status":"OK"' sonar-status.json
+                '''
+            }
+        }
+
+        stage('Project Files') {
+            steps {
+                sh '''
+                    test -f "$PROJECT_DIR/docker-compose.yml"
+                    test -f "$PROJECT_DIR/Jenkinsfile"
+                    test -f "$PROJECT_DIR/monitoring/prometheus.yml"
+                    echo "Temel DevOps dosyalari dogrulandi."
+                '''
+            }
+        }
+
+        stage('Smoke Check') {
+            steps {
+                sh '''
+                    curl -fsS http://techstore-app-internal:5000/health | tee health.json
+                    grep -q '"status":"healthy"' health.json
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'TechStore local Jenkins pipeline basariyla tamamlandi.'
+        }
+        failure {
+            echo 'TechStore local Jenkins pipeline hata verdi.'
+        }
+    }
+}
