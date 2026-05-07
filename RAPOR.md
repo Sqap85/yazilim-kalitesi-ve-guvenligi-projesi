@@ -163,4 +163,3 @@ Uygulama ekran görüntüleri:
 ![Sepet](screenshots/cart.png)
 ![Checkout](screenshots/checkout.png)
 ![Health Endpoint](screenshots/health.png)
-
